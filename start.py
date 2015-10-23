@@ -60,13 +60,17 @@ def main():
     user_service = str(sys.argv[3])
     user_email = str(sys.argv[4])
     for i in (user_name, user_passwd, user_service, user_email):
-      if not isinstance(i, (str)): raise TypeError('Bad Type, ask string.');sys.exit(3)
-    if not isinstance(user_time, (int)) or user_time <= 0: raise TypeError('Bad Type, ask number.');sys.exit(3)
-    if re.match(r'([0-9a-zA-Z\_*\.*\-*]+)@([a-zA-Z0-9\-*\_*\.*]+)\.([a-zA-Z]+$)', user_email) == None: print "Mail format error.";sys.exit(3)
-  else:
-    print "\033[0;31;40mUsage:user time service email\033[0m"
-    sys.exit(1)
-
+      if not isinstance(i, (str)):
+        raise TypeError('Bad Type, ask string.')
+        sys.exit(3)
+      if not isinstance(user_time, (int)) or user_time <= 0:
+        raise TypeError('Bad Type, demand is greater than 0 of the number.')
+        sys.exit(3)
+      if re.match(r'([0-9a-zA-Z\_*\.*\-*]+)@([a-zA-Z0-9\-*\_*\.*]+)\.([a-zA-Z]+$)', user_email) == None:
+        print "Mail format error.";sys.exit(3)
+      else:
+        print "\033[0;31;40mUsage:user time service email\033[0m"
+        sys.exit(1)
   if user_service in WEBS:
     call(['python ' + os.path.join(BASE_DIR, 'Web.py')], shell=True)
   elif user_service in APPS:
