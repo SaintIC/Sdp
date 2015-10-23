@@ -43,6 +43,7 @@ REDIS_PASSWORD = REDIS_CONF['password']
 MYSQL_HOST = MYSQL_CONF['host']
 MYSQL_PORT = MYSQL_CONF['port']
 MYSQL_DB = MYSQL_CONF['db']
+MYSQL_USER = MYSQL_CONF['user']
 MYSQL_PASSWORD = MYSQL_CONF['password']
 
 #set docker variables
@@ -78,3 +79,4 @@ def main():
 
 if __name__ == "__main__":
   main()
+

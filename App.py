@@ -2,10 +2,11 @@
 #-*- coding=utf8 -*-
 __author__ = 'saintic'
 __date__ = '2015-10-14'
-__doc__ = 'apps'
+__doc__ = 'Apps'
 __version__ = 'sdp1.1'
 
+#PORT:Start the port
 from start import PORT
-#PORTS= [];If right +, if wrong -
+#If right +, if wrong -
 
 
