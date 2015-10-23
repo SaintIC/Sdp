@@ -15,18 +15,19 @@ class Docker():
   def __init__(self):
     connect = docker.Client(base_url='unix://var/run/docker.sock')
 
-  def build(self):
+  def image_build(self):
+    pass
+
+  def image_push(self):
     pass
 
   def container_create(self, **kw):
     self.connect.create_container(image=img,stdin_open=True, tty=True, name=imgname)
     self.connect.create_container(image='staugur/base', name='all', stdin_open=True, cpu_shares=2, tty=True)
 
-  def start(self):
+  def container_start(self):
     pass
 
-  def container_run(self):
+  def container_ci(self):
     pass
 
-  def push(self):
-    pass
