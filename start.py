@@ -7,8 +7,7 @@ __version__ = 'sdp1.1'
 
 try:
   import sys,os,re
-  from Core.sdp_conf import read_conf
-  from Core.sdp_funs import genpasswd
+  from Core.sdp_funs import genpasswd,read_conf
   from subprocess import call
 except ImportError as Errmsg:
   print __file__,"import module failed, because %s" % Errmsg
@@ -26,7 +25,6 @@ DOCKER_CONF = read_conf(BASE_CONF, 'docker')
 
 #set global variables
 LANG = GLOBAL_CONF['LANG']
-PORT = GLOBAL_CONF['StartPort']
 SDP_HOME = GLOBAL_CONF['SDP_HOME']
 SDP_DATA_HOME = GLOBAL_CONF['SDP_DATA_HOME']
 SDP_USER_DATA_HOME = os.path.join(SDP_DATA_HOME, str(GLOBAL_CONF['SDP_USER_DATA_HOME']))

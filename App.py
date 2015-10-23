@@ -6,7 +6,7 @@ __doc__ = 'Apps'
 __version__ = 'sdp1.1'
 
 #PORT:Start the port
-from start import PORT
+PORT=[8000,]
 #If right +, if wrong -
 
 

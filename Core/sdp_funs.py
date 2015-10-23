@@ -17,4 +17,15 @@ def genpasswd(L=15):
     stri+=chars[random.randint(0, length)]
   return stri
 
+def read_conf(f,i):
+  if not isinstance(f, (str)):
+    raise TypeError('Bad operand type, ask a file.')
+  if not isinstance(i, (str)):
+    raise TypeError('bad operand type, ask string.')
+  from configobj import ConfigObj
+  try:
+    return ConfigObj(f)[i]
+  except:
+    print 'Get configuration information failure.'
+    return 1
 
