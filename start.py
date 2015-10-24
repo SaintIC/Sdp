@@ -12,8 +12,9 @@ try:
 except ImportError as Errmsg:
   print __file__,"import module failed, because %s" % Errmsg
 
+CONF_NAME = 'sdp.conf'
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-BASE_CONF = os.path.join(BASE_DIR,'sdp.conf')
+BASE_CONF = os.path.join(BASE_DIR, str(CONF_NAME))
 APPS = ("mongodb", "mysql", "redis", "memcache", "tair")
 WEBS = ("nginx", "tengine", "httpd", "lighttpd", "tomcat", "resin")
 
@@ -64,7 +65,7 @@ def main():
         raise TypeError('Bad Type, ask string.')
         sys.exit(3)
       if not isinstance(user_time, (int)) or user_time <= 0:
-        raise TypeError('Bad Type, demand is greater than 0 of the number.')
+        raise ValueError('Bad, demand is greater than 0 of the number.')
         sys.exit(3)
       if re.match(r'([0-9a-zA-Z\_*\.*\-*]+)@([a-zA-Z0-9\-*\_*\.*]+)\.([a-zA-Z]+$)', user_email) == None:
         print "Mail format error.";sys.exit(3)

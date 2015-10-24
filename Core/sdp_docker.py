@@ -22,12 +22,23 @@ class Docker():
     pass
 
   def container_create(self, **kw):
-    self.connect.create_container(image=img,stdin_open=True, tty=True, name=imgname)
-    self.connect.create_container(image='staugur/base', name='all', stdin_open=True, cpu_shares=2, tty=True)
+    if not isinstance(kw, (dict)):
+      raise TypeError('Bad Type, ask a dict.')
+    image=kw['image', None]
+    mem=kw['mem', None]
+    cpu=kw['cpu', None]
+    name=kw['name', None]
+    self.connect.create_container(image=image, stdin_open=True, tty=True, cpu=cpu, mem=mem, name=name)
+    return container_id
 
-  def container_start(self):
-    pass
+  def container_start(self, container_id):
+    self.connect.start(resource_id=container_id)
+    return sucess or fail
 
-  def container_ci(self):
-    pass
-
+  def container_ci(self, *info):
+    'info=(push_start image, tag, registry)'
+    if not isinstance(info, (list)):
+      raise TypeError('Bad type, ask a list, (push_start, image, tag, registry)')
+    if push_start == On or push_start == on:
+      self.connect.push()
+    return sucess or fail

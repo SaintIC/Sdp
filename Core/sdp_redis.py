@@ -29,24 +29,7 @@ class RedisObject():
   def ping(self):
     return self.redis_object.ping()
 
-  def set(self):
-    pass
-
-  def get(self):
-    pass
-
-  def mset(self):
-    pass
-
-  def mget(self):
-    pass
-
-connect=('127.0.0.1', 6379, 1, None)
-test=RedisObject(connect)
-print test.ping()
-print test.keys()
-
-def set_kv(cid,cip):
+  def set(self, cid,cip):
   if cid == None or cip == None:
     sys.exit(1)
   if db.exists(cid) ==  True:
@@ -61,8 +44,21 @@ def set_kv(cid,cip):
       db.save()
       return (cid,cip)
 
-def get_kv(cid):
+  def get(self,cid):
   if cid == None:
     sys.exit(1)
   cip=db.get(cid)
   return cip
+
+  def mset(self):
+    pass
+
+  def mget(self):
+    pass
+
+connect=('127.0.0.1', 6379, 1, None)
+test=RedisObject(connect)
+print test.ping()
+print test.keys()
+
+

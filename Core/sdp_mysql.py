@@ -10,7 +10,7 @@ try:
 except ImportError as errmsg1:
   import mysql
 except ImportError as Errmsg2:
-  print __file__, "import MySQL-python and mysql-connector-python modules failed, because %s,%s" %(Errmsg1, Errmsg2)
+  print __file__, "import MySQLdb and mysql-connector-python modules failed, because %s,%s" %(Errmsg1, Errmsg2)
   exit(1)
 
 class MySQLObject():
