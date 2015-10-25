@@ -48,8 +48,10 @@ MYSQL_PASSWORD = MYSQL_CONF['password']
 #set docker variables
 DOCKER_PUSH = DOCKER_CONF['Push']
 DOCKER_IMG_PRE = DOCKER_CONF['Img_prefix']
+DOCKER_TAG = DOCKER_CONF['TagRegistry']
 DOCKER_REGISTRY = DOCKER_CONF['DockerRegistry']
-
+print DOCKER_TAG
+print DOCKER_REGISTRY
 def main():
   reload(sys)
   sys.setdefaultencoding(LANG)
@@ -74,7 +76,7 @@ def main():
   #  print "\033[0;31;40mUsage:user time service email\033[0m"
   except:
     print "\033[0;31;40mUsage:user time service email\033[0m"  
-  global user_name, user_passwd, user_service, user_email
+  #global user_name, user_passwd, user_service, user_email
   if user_service in WEBS:
     call(['python ' + os.path.join(BASE_DIR, 'Web.py')], shell=True)
   elif user_service in APPS:
