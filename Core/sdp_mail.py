@@ -25,18 +25,22 @@ from email.header import Header
 from email.mime.text import MIMEText
 from email.utils import parseaddr,formataddr
 import smtplib,sys
+from os.path import isfile
 
 def _format_addr(s):
   name, addr = parseaddr(s)
   return formataddr((Header(name, 'utf-8').encode(), addr))
 
-
 if len(sys.argv) == 4:
   user=sys.argv[1]
   to_addr=sys.argv[2]
   content_file=sys.argv[3]
+  if not isfile(content_file):
+    print "The third parameter need a file."
+    sys.exit(1)
 else:
   print "Into the reference error, three parameters are required."
+  print "Usage:user user_email user_info_html_file"
   sys.exit(1)
 
 with open(content_file) as f: content=f.read()

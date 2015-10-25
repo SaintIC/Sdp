@@ -12,16 +12,16 @@ except ImportError as Errmsg:
   exit(1)
 
 class RedisObject():
-  '''read or write redis, set or get, mset or mget.'''
+  '''read or write redis, set or get, mset or mget.
+  析构函数需要传给类RedisObject一个tuple，包含redis连接的四个元素。'''
   def __init__(self, conn):
-    '''析构函数__init__需要两个参数，除了self，还需要传给类RedisObject一个conn tuple，包含redis连接的四个元素。'''
     if not isinstance(conn, (tuple)):
       raise TypeError('Bad Error Type, ask a tuple.')
     if len(conn) == 4:
       self.redis_object = redis.Redis(host=conn[0], port=conn[1], db=conn[2],password=conn[3])
     else:
       print 'Entry error, requires four elements.'
-      exit(2)
+      return 2
 
   def keys(self):
     return self.redis_object.keys()
@@ -29,26 +29,27 @@ class RedisObject():
   def ping(self):
     return self.redis_object.ping()
 
-  def set(self, cid,cip):
-  if cid == None or cip == None:
-    sys.exit(1)
-  if db.exists(cid) ==  True:
-    print "cid Exists\n"
-    sys.exit(3)
-  else:  #cid = False
-    if db.get(cid) == cip:
-      print "cip Exists\n"
-      sys.exit(1)
+  def set(self, k, v):
+    if k == None or v == None:
+      print "parameter error, key or value is none."
+      return 1
+    if self.redis_object.exists(k):
+      print "%s exists, quit." % k
+      return 1
     else:
-      db.set(cid,cip)
-      db.save()
-      return (cid,cip)
+      if self.redis_object.get(k) == v:
+        print "%s exist, but equal %s, will quit." %(k,v)
+        return 1
+      else:
+        self.redis_object.set(k,v)
+        self.redis_object.save()
+        return (k,v)
 
-  def get(self,cid):
-  if cid == None:
-    sys.exit(1)
-  cip=db.get(cid)
-  return cip
+  def get(self, k):
+    if k == None:
+      print "key(%s) get error." % k
+      return 1
+    return self.redis_object.get(k)
 
   def mset(self):
     pass
@@ -56,9 +57,10 @@ class RedisObject():
   def mget(self):
     pass
 
-connect=('127.0.0.1', 6379, 1, None)
+connect=('127.0.0.1', 6379, 0, None)
 test=RedisObject(connect)
 print test.ping()
 print test.keys()
-
+print test.set('name','taochengwei')
+#print test.get()
 
