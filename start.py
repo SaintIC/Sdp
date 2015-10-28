@@ -15,7 +15,7 @@ except ImportError as Errmsg:
 CONF_NAME = 'sdp.conf'
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_CONF = os.path.join(BASE_DIR, str(CONF_NAME))
-APPS = ("mongodb", "mysql", "redis", "memcache", "tair")
+APPS = ("mongodb", "mysql", "redis", "memcache")
 WEBS = ("nginx", "tengine", "httpd", "lighttpd", "tomcat", "resin")
 
 #get variables from sdp.conf, format is dict.
@@ -50,12 +50,10 @@ DOCKER_PUSH = DOCKER_CONF['Push']
 DOCKER_IMG_PRE = DOCKER_CONF['Img_prefix']
 DOCKER_TAG = DOCKER_CONF['TagRegistry']
 DOCKER_REGISTRY = DOCKER_CONF['DockerRegistry']
-print DOCKER_TAG
-print DOCKER_REGISTRY
+
 def main():
   reload(sys)
   sys.setdefaultencoding(LANG)
-  #if len(sys.argv) == 5:
   try:
     user_name = str(sys.argv[1])
     user_passwd = str(genpasswd())
@@ -72,10 +70,9 @@ def main():
       if re.match(r'([0-9a-zA-Z\_*\.*\-*]+)@([a-zA-Z0-9\-*\_*\.*]+)\.([a-zA-Z]+$)', user_email) == None:
         print "Mail format error."
         sys.exit(3)
-  #else:
-  #  print "\033[0;31;40mUsage:user time service email\033[0m"
   except:
-    print "\033[0;31;40mUsage:user time service email\033[0m"  
+    print "\033[0;31;40mUsage:user time service email\033[0m"
+    exit(1)
   #global user_name, user_passwd, user_service, user_email
   if user_service in WEBS:
     call(['python ' + os.path.join(BASE_DIR, 'Web.py')], shell=True)
