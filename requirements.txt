@@ -1,3 +1,0 @@
-docker-py
-redis
-configobj
